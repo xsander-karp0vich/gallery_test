@@ -4,4 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:padding="10dp"
+    android:background="@color/main_black">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photoRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addPhotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        app:srcCompat="@drawable/baseline_add_15"
+        app:tint="@color/main_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/add_photo_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

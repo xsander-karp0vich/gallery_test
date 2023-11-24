@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.karpovich.hush_test'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.karpovich.hush_test"
