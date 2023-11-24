@@ -10,7 +10,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/photoRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/photo_item"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPhotoButton"
