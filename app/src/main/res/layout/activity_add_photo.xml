@@ -35,6 +35,7 @@
 
     <EditText
         android:layout_margin="10dp"
+        android:inputType="text"
         android:id="@+id/photoTitleEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -42,7 +43,7 @@
         android:fontFamily="@font/degular"
         android:gravity="center"
         android:textColor="#80000000"
-        android:hint="set photo title"
+        android:hint="@string/set_photo_title"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
