@@ -1,5 +1,7 @@
 package com.karpovich.hush_test.data.entities;
 
+import android.net.Uri;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
