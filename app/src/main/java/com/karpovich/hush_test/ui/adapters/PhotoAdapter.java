@@ -22,10 +22,16 @@ import java.util.List;
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
 
     private List<Photo> photos = new ArrayList<>();
-
     public void setPhotos(List<Photo> photos) {
         this.photos = photos;
         notifyDataSetChanged();
+    }
+    public static OnPhotoClickListener onPhotoClickListener;
+    public static PhotoAdapter.OnPhotoClickListener getOnPhotoClickListener() {
+        return onPhotoClickListener;
+    }
+    public static void setOnPhotoClickListener(OnPhotoClickListener onPhotoClickListener) {
+        PhotoAdapter.onPhotoClickListener = onPhotoClickListener;
     }
 
     @NonNull
@@ -47,11 +53,24 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
                 .into(holder.imageView);
         String photoTitle = photo.getTitle();
         holder.photoTitleTextView.setText(photoTitle);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onPhotoClickListener!=null){
+                    onPhotoClickListener.onClick(photo);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return photos.size();
+    }
+
+    public interface OnPhotoClickListener{
+        void onClick(Photo photo);
     }
 
     static class PhotoViewHolder extends RecyclerView.ViewHolder{

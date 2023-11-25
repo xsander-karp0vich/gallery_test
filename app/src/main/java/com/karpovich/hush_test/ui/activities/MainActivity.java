@@ -2,6 +2,7 @@ package com.karpovich.hush_test.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -54,5 +55,13 @@ public class MainActivity extends AppCompatActivity {
         photoAdapter = new PhotoAdapter();
         binding.photoRecycleView.setAdapter(photoAdapter);
         binding.photoRecycleView.setLayoutManager(new GridLayoutManager(this,4));
+        photoAdapter.setOnPhotoClickListener(new PhotoAdapter.OnPhotoClickListener() {
+            @Override
+            public void onClick(Photo photo) {
+                int i = 0;
+                Log.d("ТАГ", "onClick: "+i);
+                i++;
+            }
+        });
     }
 }
