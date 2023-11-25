@@ -55,12 +55,15 @@ public class MainActivity extends AppCompatActivity {
         photoAdapter = new PhotoAdapter();
         binding.photoRecycleView.setAdapter(photoAdapter);
         binding.photoRecycleView.setLayoutManager(new GridLayoutManager(this,4));
-        photoAdapter.setOnPhotoClickListener(new PhotoAdapter.OnPhotoClickListener() {
+        setOnPhotoItemClickListener();
+    }
+
+    private void setOnPhotoItemClickListener() {
+        PhotoAdapter.setOnPhotoClickListener(new PhotoAdapter.OnPhotoClickListener() {
             @Override
             public void onClick(Photo photo) {
-                int i = 0;
-                Log.d("ТАГ", "onClick: "+i);
-                i++;
+                Intent intent = PhotoDetailActivity.newIntent(MainActivity.this,photo.getTitle(),photo.getUri(),photo.getId());
+                startActivity(intent);
             }
         });
     }
