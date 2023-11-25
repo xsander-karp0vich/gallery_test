@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hush! Your secret gallery</string>
     <string name="add_photo_button">add photo button</string>
+    <string name="set_photo_title">set photo title</string>
 </resources>
