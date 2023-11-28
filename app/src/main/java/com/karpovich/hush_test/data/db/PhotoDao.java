@@ -22,4 +22,7 @@ public interface PhotoDao {
 
     @Query("DELETE FROM photos WHERE id = :photoId")
     Completable removePhoto(int photoId);
+
+    @Query("SELECT * FROM photos WHERE id = :photoId")
+    LiveData<Photo> getPhotoById(int photoId);
 }

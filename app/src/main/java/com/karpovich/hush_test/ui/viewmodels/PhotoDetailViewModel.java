@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.karpovich.hush_test.data.db.PhotoDao;
 import com.karpovich.hush_test.data.db.PhotoDataBase;
@@ -25,6 +26,10 @@ public class PhotoDetailViewModel extends AndroidViewModel {
         photoDao.removePhoto(photoId)
                 .subscribeOn(Schedulers.newThread())
                 .subscribe();
+    }
+
+    public LiveData<Photo> getPhoto(int photoId){
+        return photoDao.getPhotoById(photoId);
     }
 
     @Override
