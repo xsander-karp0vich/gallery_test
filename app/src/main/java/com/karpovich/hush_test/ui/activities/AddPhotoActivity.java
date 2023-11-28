@@ -85,6 +85,8 @@ public class AddPhotoActivity extends AppCompatActivity {
 
                 ActivityCompat.requestPermissions(AddPhotoActivity.this,
                         new String[]{READ_EXTERNAL_STORAGE},REQUEST_CODE_M);
+            } else {
+                galleryIntent();
             }
         }
 
@@ -129,9 +131,10 @@ public class AddPhotoActivity extends AppCompatActivity {
             if (image != null && !title.isEmpty()){
                 Photo photo = new Photo(0,title,image.toString());
                 viewModel.insertPhoto(photo);
+                Toast.makeText(this,R.string.saved_success,Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                Toast.makeText(this, "Something went wrong...",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, R.string.error_photo,Toast.LENGTH_SHORT).show();
             }
         });
 

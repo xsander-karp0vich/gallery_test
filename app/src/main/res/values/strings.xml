@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Hush! Your secret gallery</string>
+    <string name="app_name">gallery test</string>
     <string name="add_photo_button">add photo button</string>
     <string name="set_photo_title">set photo title</string>
+    <string name="error_message_perms">Для корректной работы приложения необходимо принять разрешения</string>
+    <string name="delited_success">Успешно удаленно</string>
+    <string name="saved_success">Успешно сохранено!</string>
+    <string name="error_message">Что то пошло не так...</string>
+    <string name="error_photo">Выберите фото</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.karpovich.hush_test.data.entities.Photo;
 
@@ -25,4 +26,7 @@ public interface PhotoDao {
 
     @Query("SELECT * FROM photos WHERE id = :photoId")
     LiveData<Photo> getPhotoById(int photoId);
+
+    @Update
+    Completable updatePhoto(Photo photo);
 }

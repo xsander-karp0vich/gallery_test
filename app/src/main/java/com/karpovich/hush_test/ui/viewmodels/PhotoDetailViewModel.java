@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.karpovich.hush_test.data.db.PhotoDao;
 import com.karpovich.hush_test.data.db.PhotoDataBase;
@@ -28,8 +29,14 @@ public class PhotoDetailViewModel extends AndroidViewModel {
                 .subscribe();
     }
 
-    public LiveData<Photo> getPhoto(int photoId){
+    public LiveData<Photo> getPhotoById(int photoId){
         return photoDao.getPhotoById(photoId);
+    }
+
+    public void updatePhoto(Photo photo) {
+        photoDao.updatePhoto(photo)
+                .subscribeOn(Schedulers.newThread())
+                .subscribe();
     }
 
     @Override
