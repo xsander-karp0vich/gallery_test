@@ -1,10 +1,18 @@
 package com.karpovich.hush_test.ui.activities;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setupRecycleView();
         observeViewModel();
     }
+
     private void init() {
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         setClickListeners();

@@ -49,7 +49,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
         Photo photo = photos.get(position);
         Glide.with(holder.itemView)
-                .load(Uri.parse(photo.getUri().toString()))
+                .load(Uri.parse(photo.getUri()))
                 .into(holder.imageView);
         String photoTitle = photo.getTitle();
         holder.photoTitleTextView.setText(photoTitle);
