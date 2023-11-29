@@ -1,12 +1,17 @@
 package com.karpovich.hush_test.ui.activities;
 
-import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,27 +19,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.Settings;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import com.karpovich.hush_test.R;
 import com.karpovich.hush_test.data.entities.Photo;
 import com.karpovich.hush_test.databinding.ActivityAddPhotoBinding;
 import com.karpovich.hush_test.ui.viewmodels.AddPhotoViewModel;
-
-import java.net.URI;
 
 public class AddPhotoActivity extends AppCompatActivity {
 
@@ -46,6 +34,7 @@ public class AddPhotoActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_R = 101;
     private Uri image = null;
     private String title = null;
+    private String description = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +49,7 @@ public class AddPhotoActivity extends AppCompatActivity {
     private void init(){
         viewModel = new ViewModelProvider(this).get(AddPhotoViewModel.class);
         binding.photoTitleEditText.setVisibility(View.GONE);
+        binding.editTextDescription.setVisibility(View.GONE);
     }
 
     private void checkPermissions() {
@@ -118,23 +108,33 @@ public class AddPhotoActivity extends AppCompatActivity {
             image = data.getData();
             binding.photoImageView.setImageURI(image);
             binding.photoTitleEditText.setVisibility(View.VISIBLE);
+            binding.editTextDescription.setVisibility(View.VISIBLE);
         }
     }
 
-    private String formatEditText(){
+    private String formatEditTextTitle(){
         return binding.photoTitleEditText.getText().toString().trim();
+    }
+    private String formatEditTextDescription() {
+        return binding.editTextDescription.getText().toString().trim();
     }
 
     private void setClickListeners(){
         binding.savePhotoImageButton.setOnClickListener(view -> {
-            title = formatEditText();
+            title = formatEditTextTitle();
+            description = formatEditTextDescription();
+
             if (image != null && !title.isEmpty()){
-                Photo photo = new Photo(0,title,image.toString());
+
+                Photo photo = new Photo(0,title,description,image.toString());
+
                 viewModel.insertPhoto(photo);
                 Toast.makeText(this,R.string.saved_success,Toast.LENGTH_SHORT).show();
                 finish();
+
             } else {
-                //Toast.makeText(this, R.string.error_photo,Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, R.string.error_photo,Toast.LENGTH_SHORT).show();
             }
         });
 

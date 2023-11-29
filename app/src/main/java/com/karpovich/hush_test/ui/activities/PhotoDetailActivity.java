@@ -79,8 +79,6 @@ public class PhotoDetailActivity extends AppCompatActivity {
     private void handlePhotoChange(Photo photo) {
         if (photo != null) {
             setEditorActionListener(photo);
-        } else {
-            Toast.makeText(this, R.string.error_message,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -96,14 +94,41 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 return false;
             }
         });
+        binding.editTextDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    handleDoneAction(photo);
+                    Toast.makeText(PhotoDetailActivity.this, R.string.saved_success,Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+        binding.savePhotoImageButton.setOnClickListener(view -> {
+            Toast.makeText(PhotoDetailActivity.this, R.string.saved_success,Toast.LENGTH_SHORT).show();
+            handleDoneAction(photo);
+        });
     }
 
+    private String formatEditTextTitle() {
+        return binding.editTextTitle.getText().toString().trim();
+    }
+    private String formatEditTextDescription() {
+        return binding.editTextDescription.getText().toString().trim();
+    }
     private void handleDoneAction(Photo photo) {
-        String newTitle = binding.editTextTitle.getText().toString().trim();
+        String newTitle = formatEditTextTitle();
+        String newDescription = formatEditTextDescription();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(binding.editTextTitle.getWindowToken(), 0);
         if (!newTitle.isEmpty()) {
             photo.setTitle(newTitle);
+            viewModel.updatePhoto(photo);
+            binding.editTextTitle.clearFocus();
+        }
+        if (!newDescription.isEmpty()) {
+            photo.setDescription(newDescription);
             viewModel.updatePhoto(photo);
             binding.editTextTitle.clearFocus();
         }
@@ -113,6 +138,8 @@ public class PhotoDetailActivity extends AppCompatActivity {
     private void updateUi() {
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
+        String description = intent.getStringExtra("description");
+        binding.editTextDescription.setText(description);
         binding.editTextTitle.setText(title);
     }
 
@@ -131,11 +158,12 @@ public class PhotoDetailActivity extends AppCompatActivity {
         }
     }
 
-    public static Intent newIntent(Context context, String title, String uri, int photoId) {
+    public static Intent newIntent(Context context, String title,String description, String uri, int photoId) {
         Intent intent = new Intent(context,PhotoDetailActivity.class);
         intent.putExtra("title",title);
         intent.putExtra("uri",uri);
         intent.putExtra("photoId",photoId);
+        intent.putExtra("description",description);
         return intent;
     }
 }

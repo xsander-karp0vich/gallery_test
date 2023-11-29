@@ -3,6 +3,7 @@ package com.karpovich.hush_test.data.entities;
 import android.net.Uri;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "photos")
@@ -12,17 +13,10 @@ public class Photo {
     private String title;
     private String description;
     private String uri;
-
     public Photo(int id, String title, String description, String uri) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.uri = uri;
-    }
-
-    public Photo(int id, String title, String uri) {
-        this.id = id;
-        this.title = title;
         this.uri = uri;
     }
 

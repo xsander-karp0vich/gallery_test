@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/main_black"
     tools:context=".ui.activities.PhotoDetailActivity"
     android:padding="10dp">
@@ -20,6 +20,7 @@
             android:fontFamily="@font/degular"
             android:inputType="text"
             android:backgroundTint="@color/white"
+            android:imeOptions="actionDone"
             tools:text="photo name"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -61,11 +62,44 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
+
+        <EditText
+            android:padding="10dp"
+            android:id="@+id/editTextDescription"
+            android:textColor="#80000000"
+            android:layout_marginTop="20dp"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_edit_text_bg"
+            android:gravity="left"
+            android:fontFamily="@font/degular"
+            android:textSize="12sp"
+            android:hint="@string/description"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <ImageButton
+            android:id="@+id/savePhotoImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main_black"
+            android:src="@drawable/check_lg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

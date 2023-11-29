@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         PhotoAdapter.setOnPhotoClickListener(new PhotoAdapter.OnPhotoClickListener() {
             @Override
             public void onClick(Photo photo) {
-                Intent intent = PhotoDetailActivity.newIntent(MainActivity.this,photo.getTitle(),photo.getUri(),photo.getId());
+                Intent intent = PhotoDetailActivity.newIntent(MainActivity.this,photo.getTitle(),photo.getDescription(),photo.getUri(),photo.getId());
                 startActivity(intent);
             }
         });
